@@ -1,0 +1,8 @@
+[webServer]
+IP ansible_port=22 ansible_ssh_private_key_file=/tmp/cartbot.pem ansible_user=ubuntu ansible_python_interpreter=/usr/bin/python3
+
+[mysql]
+IP ansible_port=22 ansible_ssh_private_key_file=/tmp/cartbot.pem ansible_user=ubuntu ansible_python_interpreter=/usr/bin/python3
+
+[elastic]
+IP ansible_port=22 ansible_ssh_private_key_file=/tmp/cartbot.pem ansible_user=ubuntu ansible_python_interpreter=/usr/bin/python3

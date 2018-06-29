@@ -1,0 +1,11 @@
+apache_create_vhosts: true
+apache_options: "-Indexes +FollowSymLinks"
+apache_remove_default_vhost: true
+apache_vhosts_filename: cartbot.sp.gl.conf
+apache_vhosts_template: myvhosts.conf.j2
+apache_vhosts:
+  - servername: "cartbot.sp.gl"
+    documentroot: "/var/www/sp.gl/cartbot/current/public/"
+  - servername: "cartbot.sp.gl-ssl"
+    documentroot: "/var/www/sp.gl/cartbot/current/public/"
+    is_ssl: true

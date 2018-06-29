@@ -1,0 +1,10 @@
+---
+- name: Rollback cartbot
+  hosts: "webServer"
+  become: true
+  become_user: root
+  vars_files:
+      - vars/deploy.yml
+
+  roles:
+      - carlosbuenosvinos.ansistrano-rollback

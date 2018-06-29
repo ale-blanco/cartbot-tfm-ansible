@@ -1,0 +1,40 @@
+---
+- name: Provisionamiento del servidor web
+  hosts: "webServer"
+  become: true
+  become_user: root
+  vars_files:
+      - vars/apache.yml
+      - vars/php.yml
+      - vars/letsencrypt.yml
+
+  pre_tasks:
+      - name: "Repositorio de todas las versiones de PHP"
+        apt_repository:
+          repo="ppa:ondrej/php"
+          update_cache=yes
+
+  roles:
+      - role: geerlingguy.ntp
+        ntp_timezone: Europe/Madrid
+
+      - { role: geerlingguy.apache }
+      - role: geerlingguy.php
+        __php_conf_paths:
+          - /etc/php/{{ php_version }}/fpm
+          - /etc/php/{{ php_version }}/apache2
+          - /etc/php/{{ php_version }}/cli
+
+        __php_extension_conf_paths:
+          - /etc/php/{{ php_version }}/fpm/conf.d
+          - /etc/php/{{ php_version }}/apache2/conf.d
+          - /etc/php/{{ php_version }}/cli/conf.d
+      - { role: geerlingguy.composer }
+      - role: geerlingguy.certbot
+
+
+  post_tasks:
+      - name: Reiniciar cron por el cambio de zona horaria
+        service:
+          name: cron
+          state: restarted

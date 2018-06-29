@@ -1,0 +1,25 @@
+---
+- name: Provisionamiento del servidor mysql
+  hosts: "mysql"
+  become: true
+  become_user: root
+  vars_files:
+      - vars/mysql.yml
+
+  pre_tasks:
+    - name: Ensure dependencies are installed.
+      apt: name={{ item }} state=present
+      with_items:
+        - python3-mysqldb
+
+  roles:
+      - role: geerlingguy.ntp
+        ntp_timezone: Europe/Madrid
+
+      - role: geerlingguy.mysql
+
+  post_tasks:
+      - name: Reiniciar cron por el cambio de zona horaria
+        service:
+          name: cron
+          state: restarted

@@ -1,0 +1,30 @@
+php_version: '7.1'
+
+php_enable_apc: false
+php_packages:
+  - php7.1
+  - php7.1-cli
+  - php7.1-common
+  - php7.1-curl
+  - php7.1-dev
+  - php7.1-gd
+  - php7.1-json
+  - php7.1-mbstring
+  - php7.1-mcrypt
+  - php7.1-opcache
+  - php7.1-xml
+  - php7.1-yaml
+  - php7.1-pdo
+  - php7.1-pdo-mysql
+  - php7.1-xml
+  - php7.1-bcmath
+  - php7.1-zip
+  - php7.1-sockets
+  - libapache2-mod-php7.1
+php_max_execution_time: 150
+php_post_max_size: 8M
+php_upload_max_filesize: 8M
+php_date_timezone: Europe/Paris
+php_opcache_memory_consumption: 128
+php_opcache_revalidate_freq: 60
+php_expose_php: off

@@ -1,0 +1,5 @@
+es_instance_name: "elasticcartbot"
+es_heap_size: "256m"
+es_config:
+    cluster.name: "cartbot"
+    network.host: 0.0.0.0

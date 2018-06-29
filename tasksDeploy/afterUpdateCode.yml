@@ -1,0 +1,24 @@
+- name: Permisos de escritura en cache
+  file:
+    path: "{{ ansistrano_release_path.stdout }}/var"
+    state: directory
+    owner: www-data
+    group: root
+    recurse: yes
+
+- name: Mover archivo .env
+  copy:
+      src: files/.env
+      dest: "{{ ansistrano_release_path.stdout }}"
+      owner: www-data
+      group: root
+      mode: 0640
+
+- name: Composer install
+  shell: cd {{ ansistrano_release_path.stdout }}; composer install --no-dev
+
+- name: Dump autoload composer
+  shell: cd {{ ansistrano_release_path.stdout }}; composer dumpautoload -o --no-dev
+
+- name: Clear cache
+  shell: cd {{ ansistrano_release_path.stdout }};php bin/console cache:clear
